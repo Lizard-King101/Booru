@@ -22,15 +22,15 @@
                                 <h3 style="color: red;">WARNING</h3>
                             </div>
                             <div class="basic-box-body posts-box featured-box">
-<?php if(isset($_GET['case'])){
-    if($_GET['case'] == 1){
-    ?>
-        <h3>Do not try to SQL inject this site.</h3>
-        <p>do you think i'm that stupid to leave this site vulnerable to attacks? common dont try my patience.</p>
-        <p>go attack someone else if you have nothing better to do.</p>
-    <?php
-    }
-}?>
+                                <?php if(isset($_GET['case'])){
+                                    if($_GET['case'] == 1){
+                                    ?>
+                                        <h3>Do not try to SQL inject this site.</h3>
+                                        <p>do you think i'm that stupid to leave this site vulnerable to attacks? common dont try my patience.</p>
+                                        <p>go attack someone else if you have nothing better to do.</p>
+                                    <?php
+                                    }
+                                }?>
                             </div>
                         </div>
                     </div>

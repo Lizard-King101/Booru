@@ -22,14 +22,15 @@
                     <div class="col-sm-12">
                         <?php if(!isset($_SESSION['username'])){?>
                         <div class="basic-box info">
-                           <div class="basic-box-head">
-                               <h3>Warning</h3>
-                           </div>
-                           <div class="basic-box-body">
-                               <p>Posts made without being logged in will result in anonymous post.</p>
-                           </div>
+                            <div class="basic-box-head">
+                                <h3>Warning</h3>
+                            </div>
+                            <div class="basic-box-body">
+                                <p>Posts made without being logged in will result in anonymous post.</p>
+                            </div>
                         </div>
                         <?php } ?>
+                        
                         <div class="basic-box">
                             <div class="basic-box-body">
                                 <label for="file" id="file-box" class="fill">

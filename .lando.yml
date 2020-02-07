@@ -1,0 +1,11 @@
+name: Booru
+recipe: lamp
+config:
+  php: '7.2'
+  via: nginx
+  webroot: www
+  xdebug: true
+  database: mysql:5.7
+  conf:
+    server: .lando/dev/nginx/nginx.conf
+    php: ./lando/dev/php/php.ini
