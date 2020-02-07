@@ -1,0 +1,48 @@
+#file-box{
+    padding: 15px;
+    border: 2px solid #EFEFF4;
+    position: relative;
+    color: white;
+    margin: 0;
+    margin: 5px 0;
+}
+
+
+
+input[type=file]{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+#file-container{
+    text-align: center;
+    padding: 50px 0px;
+    display: block;
+    transition: .2s;  
+}
+#file-container.min{
+    padding: 0 0;
+    transition: .4s;
+}
+
+#file-container h2, #file-container h3{
+    margin: 0;
+} 
+#prog{
+    display: block;
+    position: relative;
+    height: 40px;
+    border: 2px solid #EFEFF4;
+}
+#prog-bar{
+    display: block;
+    position: absolute;
+    background-color: #EFEFF4;
+    top: 0;
+    left: 0;
+    height: 100%;
+}
