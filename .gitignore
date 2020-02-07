@@ -1,0 +1,8 @@
+
+// ignore uploads folder
+
+uploads/flash/.
+uploads/photos/.
+uploads/thumbs/.
+uploads/usrts/ptofile/.
+uploads/videos/.
