@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'db.php';
+include './db.php';
 
 /* Start Pagination */
 $page = 0;
@@ -27,7 +27,7 @@ if(isset($_POST['type']) && $_POST['type'] != ''){
 			$stmt = $pdo->query('SELECT * FROM posts ORDER BY date_time DESC LIMIT 24');
 			$posts = $stmt->fetchAll();
 	}else if($_POST['type'] == 'featured'){
-			$stmt = $pdo->query('SELECT * FROM posts WHERE featured=1 ORDER BY date_time DESC LIMIT 10');
+			$stmt = $pdo->query('SELECT * FROM posts WHERE featured = "1" ORDER BY date_time DESC LIMIT 10');
 			$posts = $stmt->fetchAll();
 	}
 	
@@ -98,7 +98,7 @@ if(isset($_POST['type']) && $_POST['type'] != ''){
 		$stmt->execute($values);
 		$page_info['total'] = $stmt->fetch()['total'];
 
-		echo json_encode(['posts'=>$posts, 'query'=>$query_posts.$query.$paginate, 'values'=>$values, 'tags'=>$tags, 'page_info'=>$page_info ]);
+		echo json_encode(['posts'=>$posts, 'query'=>$query_posts.$query.$paginate, 'values'=>$values, 'tags'=>array("like"=>$like), "not_like"=>$notlike, 'page_info'=>$page_info ]);
 
 	}else{
 		$_SESSION['back_tags'] = "";

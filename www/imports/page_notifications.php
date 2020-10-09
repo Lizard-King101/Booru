@@ -1,5 +1,5 @@
 <?php 
-include "ajax/db.php";
+include_once(dirname(__FILE__)."/../ajax/db.php");
 $page = basename($_SERVER['PHP_SELF'],'.php') == "index" || "" ? "home" : basename($_SERVER['PHP_SELF'],'.php');
 
 $stmt = $pdo->query("SELECT * FROM `notifications` WHERE page = '$page' AND active = 1 ");
@@ -22,3 +22,14 @@ foreach($notif as $n){ ?>
 </div>
 </div>
 <?php } ?>
+
+<div class="basic-box info">
+   <div class="basic-box-head">
+	   <h3>Session</h3>
+   </div>
+   <div class="basic-box-body">
+      <pre>
+      <?php print_r($_SESSION); ?>
+      </pre>
+   </div>
+</div>

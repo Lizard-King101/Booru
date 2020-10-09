@@ -39,7 +39,7 @@ $(document).ready(function(){
 			$('#editor_'+id).summernote('destroy');
 		}
 		$.ajax({
-			url: 'ajax/admin/ajax/notification_handler.php',
+			url: 'ajax/admin/ajax/notification_handler',
 			data: data,
 			type: 'POST',
 			dataType: 'json',
@@ -52,13 +52,13 @@ $(document).ready(function(){
 	$('body').on('click', 'a.button.head.delete', function (){
 		var id = $(this).attr('data-id');
 		$.ajax({
-			url: 'ajax/admin/ajax/notification_handler.php',
+			url: 'ajax/admin/ajax/notification_handler',
 			data: {
 				dowhat: 'delete',
 				id: id
 			},
 			type: 'POST',
-			dataType: 'json',
+			dataType: 'JSON',
 			success: function(data){
 				console.log(data);
 			}
@@ -76,7 +76,7 @@ function updateOption(el){
 		data = el.checked;
 	}
 	$.ajax({
-		url: 'ajax/admin/ajax/notification_handler.php',
+		url: 'ajax/admin/ajax/notification_handler',
 		data: {
 			dowhat: 'update_opt',
 			id: id,

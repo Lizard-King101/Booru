@@ -1,3 +1,5 @@
+console.log('postManager');
+
 $(document).ready(function(){
 	
 	$('#vote-down').click(function(){
@@ -17,7 +19,18 @@ $(document).ready(function(){
 		var sPage = sPath.substr(sPath.lastIndexOf('/') + 1);
 		if(sPage !== 'search'){
 			var temp = toTagSafe(toTitleCase($('form#search-form input[type="text"]').val()));
-			$.ajax({url:'ajax/update_settings',type: 'POST', data: {back_tags: temp, back_page: 0}, success: () => { location = "/search";}});
+			$.ajax({
+				url:'ajax/update_settings',
+				type: 'POST', 
+				data: {
+					back_tags: temp, 
+					back_page: 0
+				}, 
+				success: () => { 
+					console.log('Redirect to search')
+					location = "/search";
+				}
+			});
 		}else{
 			Search();
 		}
@@ -103,7 +116,7 @@ function Search(tags = false, page = 0, per = 24){
 		temp = toTagSafe(toTitleCase($('form#search-form input[type="text"]').val()));
 	}
 	$.ajax({
-		url: 'ajax/get_posts.php',
+		url: 'ajax/get_posts',
 		type: 'POST',
 		data: {
 			tags: temp,
@@ -112,6 +125,7 @@ function Search(tags = false, page = 0, per = 24){
 		},
 		dataType: 'JSON',
 		success: function(data){
+			console.log(data);
 			pageUpdate(data.page_info);
 			insertPosts('.search-box', data.posts);
 		}

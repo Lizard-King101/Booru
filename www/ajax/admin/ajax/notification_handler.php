@@ -1,5 +1,7 @@
 <?php
 include "../../db.php";
+$retArr = array();
+$retArr['post'] = $_POST;
 if(isset($_POST['dowhat'])){
 	if(isset($_POST['id']) && $_POST['id'] != ""){
 		$id = $_POST['id'];
@@ -28,8 +30,12 @@ if(isset($_POST['dowhat'])){
 	}
 	
 	if($_POST['dowhat'] == "delete"){
-		$stmt = $pdo->query("DELETE FROM `notifications` WHERE `id` = '$id' ");
+		$stmt = $retArr['deleted'] = $pdo->query("DELETE FROM `notifications` WHERE `id` = '$id' ");
+		
 	}
 	
 }
+
+
+echo json_encode($retArr);
 ?>

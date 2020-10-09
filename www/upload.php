@@ -17,7 +17,7 @@
         <div id="body-box">
             <?php include 'navbar.php';?>
             <div class="container">
-               <?php include "imports/page_notifications.php"; ?>
+               <?php // include "imports/page_notifications.php"; ?>
                 <div class="row">
                     <div class="col-sm-12">
                         <?php if(!isset($_SESSION['username'])){?>

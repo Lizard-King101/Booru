@@ -15,7 +15,7 @@
 
                 <div id="message"></div>
             </form>
-            <script>
+            <!-- <script>
                 $( "#usersignup" ).validate({
                   rules: {
                     email: {
@@ -31,7 +31,7 @@
                     }
                   }
                 });
-            </script>
+            </script> -->
         </div>
     </div>
 </div>

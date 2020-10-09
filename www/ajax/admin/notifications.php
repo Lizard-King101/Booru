@@ -7,7 +7,7 @@
 				<select id="new_page" name="page">
 					<option value="">Display On Page</option>
 					<?php foreach($pages as $p){?>
-					<option value="<?php echo $p; ?>"><?php echo ucwords($p); ?></option>
+						<option value="<?php echo $p; ?>"><?php echo ucwords($p); ?></option>
 					<?php } ?>
 				</select>
 				<a data-id="main" class="button head save">Save</a>

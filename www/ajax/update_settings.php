@@ -6,4 +6,5 @@
       echo $key.": ".$_SESSION[$key];
     }
   }
+  echo json_encode($_POST);
 ?>

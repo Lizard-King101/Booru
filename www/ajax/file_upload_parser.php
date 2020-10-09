@@ -1,7 +1,6 @@
 <?php
 session_start();
-
-require 'db.php';
+include_once(dirname(__FILE__).'/db.php');
 
 /* Allowed File Extensions */
 $videos_ext = array("mp4", "webm");
@@ -54,34 +53,38 @@ if(isset($_FILES['file'])){
     /* echo 'Type: '.$upload_type.', Folder: '.$put_folder.', Name: '.$new_name.', User: '.$user; */
     
     if($file_tmp != ''){
-				/* Move File update tabels */
-				if(move_uploaded_file($file_tmp, $put_folder.$new_name)){
-						$ex = array($postid, $post_name, $new_name, $upload_type, $_POST['tags'], $user, $timestamp);
-						$prep = 'INSERT INTO `posts` (`id`, `name`, `loc`, `type`, `tags`, `user`, `date_time`) VALUES (?, ?, ?, ?, ?, ?, ?)';
-						if(isset($_POST['thumb'])){
-							$thumb_name = 'thumb_'.$postid.'.png';
-							list($type, $data) = explode(';', $_POST['thumb']);
-							list(, $data) = explode(',', $data);
-							$data = base64_decode($data);
-							if(file_put_contents('../uploads/thumbs/'.$thumb_name , $data)){
-								$ex = array($postid, $post_name, $new_name, $thumb_name, $upload_type, $_POST['tags'], $user, $timestamp);
-								$prep = 'INSERT INTO `posts` (`id`, `name`, `loc`, `thumb`, `type`, `tags`, `user`, `date_time`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
-							}
-						}
-						$stmt = $pdo->prepare($prep);
-						$stmt->execute($ex);
-						$ex = array($postid);
-						
-						$stmt = $pdo->prepare('INSERT INTO tags (tag, used) VALUES (?, 1) ON DUPLICATE KEY UPDATE used=used+1;');
-						foreach($tags as $t){
-							$stmt->execute([$t]);
-						}
-						echo BuildJson(00, 'File Upload Complete', $postid);	
-						
+        try {
+            /* Move File update tabels */
+            if(move_uploaded_file($file_tmp, $put_folder.$new_name)){
+                $ex = array($postid, $post_name, $new_name, $upload_type, $_POST['tags'], $user, $timestamp);
+                $prep = 'INSERT INTO `posts` (`id`, `name`, `loc`, `type`, `tags`, `user`, `date_time`) VALUES (?, ?, ?, ?, ?, ?, ?)';
+                if(isset($_POST['thumb'])){
+                    $thumb_name = 'thumb_'.$postid.'.png';
+                    list($type, $data) = explode(';', $_POST['thumb']);
+                    list(, $data) = explode(',', $data);
+                    $data = base64_decode($data);
+                    if(file_put_contents('../uploads/thumbs/'.$thumb_name , $data)){
+                        $ex = array($postid, $post_name, $new_name, $thumb_name, $upload_type, $_POST['tags'], $user, $timestamp);
+                        $prep = 'INSERT INTO `posts` (`id`, `name`, `loc`, `thumb`, `type`, `tags`, `user`, `date_time`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+                    }
+                }
+                $stmt = $pdo->prepare($prep);
+                $stmt->execute($ex);
+                $ex = array($postid);
+                
+                $stmt = $pdo->prepare('INSERT INTO tags (tag, used) VALUES (?, 1) ON DUPLICATE KEY UPDATE used=used+1;');
+                foreach($tags as $t){
+                    $stmt->execute([$t]);
+                }
+                echo BuildJson(00, 'File Upload Complete', $postid);	
+                    
 
-				}else{
-						echo BuildJson(02, 'File Move Failed', '');
-				}
+            }else{
+                    echo BuildJson(02, 'File Move Failed', '');
+            }
+        } catch (Exception $e){
+            echo BuildJson(01, $e->getMessage(), '');
+        }
     }else{
         echo BuildJson(01, $file_er, '');
     }

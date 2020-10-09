@@ -16,7 +16,9 @@
         <div id="body-box">
            <?php include 'navbar.php';?>
             <div class="container body">
-              	<?php include "imports/page_notifications.php"; ?>
+                <?php 
+                     include "imports/page_notifications.php";
+                ?>
                 <div class="row">
                     <div id="pop-col" class="col-md-3 col-sm-6">
                         <div class="basic-box">

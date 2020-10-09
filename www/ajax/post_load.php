@@ -29,16 +29,16 @@ foreach($post as $p){
     $upd = $pdo->prepare("UPDATE `posts` SET views=? WHERE id=?");
     $upd->execute(array($view, $clean_id));
     
+    $upd = $pdo->query("SELECT r.rate, count(*) as amount FROM `ratings` as r GROUP BY r.rate ORDER BY r.rate");
+    $vote = $upd->fetchAll();
+
     $id = array($p['user']);
-    $stmt = $updo->prepare('SELECT * FROM members WHERE id = ?');
+    $stmt = $pdo->prepare('SELECT * FROM members WHERE id = ?');
     $stmt->execute($id);
     $userr = $stmt->fetchAll();
-    $profile = '';
-    $user = '';
-    foreach($userr as $u){
-        $profile = $u['profile'];
-        $user = $u['username'];
-    }
+    $profile = $userr[0]['profile'];
+    $user = $userr[0]['username'];
+    
     $rate = 'none';
 		if(isset($p['rate'])){
 			if($p['rate'] == '1'){
@@ -49,11 +49,11 @@ foreach($post as $p){
 		}
     
     if($p['type'] == 'image'){
-        DisplayPicture($p['name'], $p['loc'], $p['id'], $user, $profile, $view, $p['up'], $p['down'], $rate);
+        DisplayPicture($p['name'], $p['loc'], $p['id'], $user, $profile, $view, $vote[1]['amount'], $vote[0]['amount'], $rate);
     }else if($p['type'] == 'video'){
-        DisplayVideo($p['name'], $p['loc'], $p['id'], $user, $profile, $view, $p['up'], $p['down'], $rate);
+        DisplayVideo($p['name'], $p['loc'], $p['id'], $user, $profile, $view, $vote[1]['amount'], $vote[0]['amount'], $rate);
     }else if($p['type'] == 'flash'){
-        DisplayFlash($p['name'], $p['loc'], $p['id'], $user, $profile, $view, $p['up'], $p['down'], $rate);
+        DisplayFlash($p['name'], $p['loc'], $p['id'], $user, $profile, $view, $vote[1]['amount'], $vote[0]['amount'], $rate);
     }
 }
 

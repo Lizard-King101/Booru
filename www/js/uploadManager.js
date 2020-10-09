@@ -144,7 +144,7 @@ function Upload(){
     ajax.addEventListener("load", completeHandler, false);
     ajax.addEventListener("error", errorHandler, false);
     ajax.addEventListener("abort", abortHandler, false);
-    ajax.open("POST", "ajax/file_upload_parser.php");
+    ajax.open("POST", "ajax/file_upload_parser");
     ajax.send(formdata);
 }
 
@@ -157,15 +157,25 @@ function progressHandler(e){
     $('#prog-bar').css('width', percent+'%');
 }
 function completeHandler(e){
-    var data = JSON.parse(e.target.responseText);
-    if(data.error == 0){
-        $('#upload-box').empty();
-        $('#upload-box').append('<h3 style="margin: 0;">Upload Complete</h3>');
-        $('#upload-box').append('<p>View your post at <a href="/view.php?id='+data.extra+'">/view.php?id='+data.extra+'</a> Or Upload Another post.</p>');
+    try {
+        var data = JSON.parse(e.target.responseText);
+        if(data.error == 0){
+            $('#upload-box').empty();
+            $('#upload-box').append('<h3 style="margin: 0;">Upload Complete</h3>');
+            $('#upload-box').append('<p>View your post at <a href="/view.php?id='+data.extra+'">/view.php?id='+data.extra+'</a> Or Upload Another post.</p>');
+        }
+        if(data.error == 1) {
+            $('#upload-box').empty();
+            $('#upload-box').append('<a id="upload" class="button hollow" onClick="Upload();">Upload</a>');
+            $('#upload-box').append('<h3 style="margin: 0;">Error Uploading</h3>');
+            $('#upload-box').append('<p>'+data.msg+'</p>');
+        }
+    } catch {
+        console.error(e.target.responseText);
     }
 }
 function errorHandler(e){
-    
+    console.error(e);
 }
 function abortHandler(e){
     

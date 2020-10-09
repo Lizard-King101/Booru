@@ -4,7 +4,7 @@
             <div class="shadow-head">
                 <a onClick="CloseShadow();" class="item-right pointer button small dark"><i class="fa fa-times"></i></a>
             </div>
-            <form onsubmit="Login();" class="form-signin" name="form1">
+            <form onsubmit="Login();" id="usersignin" class="form-signin" name="form1">
                 <h2 class="form-signin-heading">Please sign in</h2>
                 <input name="myusername" id="myusername" type="text" class="form-control add-marg" placeholder="Username" autofocus>
                 <input name="mypassword" id="mypassword" type="password" class="form-control add-marg" placeholder="Password">

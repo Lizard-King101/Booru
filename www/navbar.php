@@ -15,7 +15,7 @@
                     </li>
                 </ul>
                 <ul id="nav-right">
-                    <?php if(isset($_SESSION['isadmin']) && $_SESSION['isadmin'] == 'true'){?>
+                    <?php if(isset($_SESSION['isadmin']) && $_SESSION['isadmin'] == 1){?>
                     <li class="nav-response"><a href="admin">Admin Panel</a></li>
                     <?php } ?>
                     <li class="nav-response"><a href="account">Account</a></li>

@@ -1,11 +1,24 @@
 name: Booru
 recipe: lamp
 config:
-  php: '7.2'
-  via: nginx
   webroot: www
   xdebug: true
-  database: mysql:5.7
-  conf:
-    server: .lando/dev/nginx/nginx.conf
-    php: ./lando/dev/php/php.ini
+
+services:
+  appserver:
+    type: php:7.2 # Specify what version of php to use
+    via: apache   # This could be nginx, should you choose so
+    webroot: www  # Specify webroot
+    config:  # If you want to add/edit
+      php: ./lando/dev/php/php.ini
+  database:
+    type: mysql
+    portforward: 3306
+    creds: 
+      user: mysql
+      password: mysql
+      database: booru
+tooling:
+  mysql:
+    user: root
+    service: database
